@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Passi Di Glamour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .registration-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .btn-submit {
+            background-color: #4a90e2;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .btn-submit:hover {
+            background-color: #357abd;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .login-link a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <h1 class="logo">Passi Di Glamour</h1>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="registration-container">
+            <h2>Crear una cuenta</h2>
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="first-name">Nombre</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="last-name">Apellido</label>
+                    <input type="text" id="last-name" name="last-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-role">Tipo de usuario</label>
+                    <select id="user-role" name="user-role" required>
+                        <option value="">Selecciona un rol</option>
+                        <option value="admin">Administrador</option>
+                        <option value="user">Usuario</option>
+                        <option value="seller">Vendedor</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" minlength="8" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm-password">Confirmar contraseña</label>
+                    <input type="password" id="confirm-password" name="confirm-password" minlength="8" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">Registrarse</button>
+                
+                <div class="login-link">
+                    ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Passi Di Glamour. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Añadir el año actual al footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Validación del formulario
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const userRole = document.getElementById('user-role').value;
+            
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+            
+            // Guardar datos del usuario en localStorage
+            const userData = {
+                name: `${firstName} ${lastName}`,
+                email: email,
+                role: userRole,
+                isLoggedIn: true
+            };
+            
+            localStorage.setItem('user', JSON.stringify(userData));
+            
+            // Redirigir según el rol
+            if (userRole === 'admin') {
+                window.location.href = 'admin.html';
+            } else if (userRole === 'seller') {
+                window.location.href = 'vendedor.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

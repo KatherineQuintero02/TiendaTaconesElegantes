@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Passi Di Glamour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Passi Di Glamour</h2>
+                <p>Admin Panel</p>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li class="active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </li>
+                    <li data-section="products">
+                        <i class="fas fa-box"></i> Productos
+                    </li>
+                    <li data-section="orders">
+                        <i class="fas fa-shopping-cart"></i> Pedidos
+                    </li>
+                    <li data-section="inventory">
+                        <i class="fas fa-warehouse"></i> Inventario
+                    </li>
+                    <li id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="admin-header">
+                <div class="header-left">
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Panel de Administración</h1>
+                </div>
+                <div class="user-info">
+                    <span id="admin-email"></span>
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="section-content active">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Productos</h3>
+                            <p id="total-products">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Pedidos Hoy</h3>
+                            <p id="today-orders">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Ventas Totales</h3>
+                            <p id="total-sales">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-orders">
+                    <h2>Pedidos Recientes</h2>
+                    <div class="table-responsive">
+                        <table id="recent-orders-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Productos</th>
+                                    <th>Total</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Orders will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products-section" class="section-content">
+                <div class="section-header">
+                    <h2>Gestión de Productos</h2>
+                    <button id="add-product-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Agregar Producto
+                    </button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Products will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders-section" class="section-content">
+                <h2>Gestión de Pedidos</h2>
+                <div class="table-responsive">
+                    <table id="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Cliente</th>
+                                <th>Productos</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Orders will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Inventory Section -->
+            <section id="inventory-section" class="section-content">
+                <h2>Gestión de Inventario</h2>
+                <div class="inventory-filters">
+                    <div class="search-box">
+                        <input type="text" id="inventory-search" placeholder="Buscar producto...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <select id="category-filter">
+                        <option value="">Todas las categorías</option>
+                        <option value="low">Tacón Bajo</option>
+                        <option value="medium">Tacón Medio</option>
+                        <option value="high">Tacón Alto</option>
+                        <option value="extra-high">Tacón Extra Alto</option>
+                        <option value="ultra-high">Ultra High Heels</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table id="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Stock Actual</th>
+                                <th>Stock Mínimo</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Inventory items will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Agregar Producto</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <div class="form-group">
+                        <label for="product-name">Nombre del Producto</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Descripción</label>
+                        <textarea id="product-description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="product-price">Precio</label>
+                            <input type="number" id="product-price" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-stock">Stock</label>
+                            <input type="number" id="product-stock" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Categoría</label>
+                        <select id="product-category" required>
+                            <option value="low">Tacón Bajo</option>
+                            <option value="medium">Tacón Medio</option>
+                            <option value="high">Tacón Alto</option>
+                            <option value="extra-high">Tacón Extra Alto</option>
+                            <option value="ultra-high">Ultra High Heels</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">URL de la Imagen</label>
+                        <input type="url" id="product-image" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal-btn">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="order-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Detalles del Pedido #<span id="order-id"></span></h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="order-details">
+                    <div class="order-info">
+                        <p><strong>Cliente:</strong> <span id="order-customer"></span></p>
+                        <p><strong>Fecha:</strong> <span id="order-date"></span></p>
+                        <p><strong>Estado:</strong> <span id="order-status"></span></p>
+                        <p><strong>Total:</strong> <span id="order-total"></span></p>
+                    </div>
+                    <div class="order-items">
+                        <h4>Productos</h4>
+                        <ul id="order-items-list">
+                            <!-- Order items will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                    <div class="order-actions">
+                        <button id="update-status-btn" class="btn btn-primary">Actualizar Estado</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.html"></script>
+    <script src="./js/admin.js" type="module"></script>
+</body>
+</html>

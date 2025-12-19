@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Vendedor - Passi Di Glamour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #ddd;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .seller-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .panel-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .panel-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .image-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: 6px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .image-upload:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 144, 226, 0.05);
+        }
+
+        .image-upload i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            height: 120px;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .preview-item:hover .remove-image {
+            opacity: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .contact-info h4 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .price-input {
+            position: relative;
+        }
+
+        .price-input:before {
+            content: '$';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .price-input input {
+            padding-left: 30px !important;
+        }
+
+        @media (max-width: 768px) {
+            .seller-panel {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo">Passi Di Glamour</a>
+            <div class="user-menu">
+                <span id="user-greeting"></span>
+                <button id="logout-btn" class="btn">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Panel de Vendedor</h1>
+        <p>Administra tus productos y ventas</p>
+
+        <div class="seller-panel">
+            <div class="panel-card">
+                <h2 class="panel-title">Subir Nuevo Producto</h2>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label for="product-name">Nombre del Producto</label>
+                        <input type="text" id="product-name" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imágenes del Producto</label>
+                        <div class="image-upload" id="image-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Arrastra y suelta las imágenes aquí o haz clic para seleccionar</p>
+                            <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+                        </div>
+                        <div class="image-preview" id="image-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-category">Categoría</label>
+                        <select id="product-category" class="form-control" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="low">Tacón Bajo</option>
+                            <option value="medium">Tacón Medio</option>
+                            <option value="high">Tacón Alto</option>
+                            <option value="extra-high">Tacón Extra Alto</option>
+                            <option value="ultra-high">Ultra High Heels</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-price">Precio</label>
+                        <div class="price-input">
+                            <input type="number" id="product-price" class="form-control" min="0" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-stock">Cantidad Disponible</label>
+                        <input type="number" id="product-stock" class="form-control" min="1" value="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-description">Descripción del Producto</label>
+                        <textarea id="product-description" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="product-specs">Especificaciones Técnicas</label>
+                        <textarea id="product-specs" class="form-control" placeholder="Material, tallas disponibles, colores, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-upload"></i> Publicar Producto
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                <div class="panel-card">
+                    <h2 class="panel-title">Información de Contacto</h2>
+                    <div class="contact-info">
+                        <h4>Datos de Contacto para Compradores</h4>
+                        <div class="form-group">
+                            <label for="seller-name">Nombre del Vendedor</label>
+                            <input type="text" id="seller-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seller-email">Correo Electrónico</label>
+                            <input type="email" id="seller-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seller-phone">Teléfono de Contacto</label>
+                            <input type="tel" id="seller-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="seller-location">Ubicación</label>
+                            <input type="text" id="seller-location" class="form-control" placeholder="Ciudad, País" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="show-contact" checked>
+                                Mostrar información de contacto en los anuncios
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card" style="margin-top: 20px;">
+                    <h2 class="panel-title">Métodos de Envío</h2>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="shipping-method" value="delivery" checked>
+                            Envío a domicilio
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="shipping-method" value="pickup" checked>
+                            Recojo en tienda
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-cost">Costo de envío (opcional)</label>
+                        <div class="price-input">
+                            <input type="number" id="shipping-cost" class="form-control" min="0" step="0.01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar nombre del usuario
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            if (userData) {
+                const userGreeting = document.getElementById('user-greeting');
+                if (userGreeting) {
+                    userGreeting.textContent = `Hola, ${userData.name}`;
+                }
+
+                // Rellenar automáticamente los datos del vendedor si existen
+                const sellerInfo = JSON.parse(localStorage.getItem('sellerInfo')) || {};
+                if (sellerInfo.name) document.getElementById('seller-name').value = sellerInfo.name;
+                if (sellerInfo.email) document.getElementById('seller-email').value = sellerInfo.email;
+                if (sellerInfo.phone) document.getElementById('seller-phone').value = sellerInfo.phone;
+                if (sellerInfo.location) document.getElementById('seller-location').value = sellerInfo.location;
+            }
+
+            // Manejar cierre de sesión
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    localStorage.removeItem('user');
+                    window.location.href = 'index.html';
+                });
+            }
+
+            // Manejar subida de imágenes
+            const imageUpload = document.getElementById('image-upload');
+            const fileInput = document.getElementById('file-input');
+            const imagePreview = document.getElementById('image-preview');
+            const maxFiles = 5;
+            let uploadedFiles = [];
+
+            imageUpload.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                
+                // Verificar límite de archivos
+                if (uploadedFiles.length + files.length > maxFiles) {
+                    alert(`Solo puedes subir un máximo de ${maxFiles} imágenes`);
+                    return;
+                }
+
+                files.forEach(file => {
+                    if (!file.type.startsWith('image/')) {
+                        alert('Solo se permiten archivos de imagen');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        uploadedFiles.push({
+                            file: file,
+                            preview: event.target.result
+                        });
+                        updateImagePreview();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            function updateImagePreview() {
+                imagePreview.innerHTML = '';
+                uploadedFiles.forEach((item, index) => {
+                    const previewItem = document.createElement('div');
+                    previewItem.className = 'preview-item';
+                    previewItem.innerHTML = `
+                        <img src="${item.preview}" alt="Vista previa ${index + 1}">
+                        <button class="remove-image" data-index="${index}">&times;</button>
+                    `;
+                    imagePreview.appendChild(previewItem);
+                });
+
+                // Actualizar contador
+                document.querySelector('#image-upload p').textContent = 
+                    `${uploadedFiles.length} de ${maxFiles} imágenes seleccionadas`;
+            }
+
+            // Eliminar imagen
+            imagePreview.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-image')) {
+                    const index = parseInt(e.target.getAttribute('data-index'));
+                    uploadedFiles.splice(index, 1);
+                    updateImagePreview();
+                }
+            });
+
+            // Manejar envío del formulario
+            const productForm = document.getElementById('product-form');
+            if (productForm) {
+                productForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Guardar información del vendedor
+                    const sellerInfo = {
+                        name: document.getElementById('seller-name').value,
+                        email: document.getElementById('seller-email').value,
+                        phone: document.getElementById('seller-phone').value,
+                        location: document.getElementById('seller-location').value
+                    };
+                    localStorage.setItem('sellerInfo', JSON.stringify(sellerInfo));
+
+                    // Aquí iría el código para enviar los datos al servidor
+                    const productData = {
+                        name: document.getElementById('product-name').value,
+                        category: document.getElementById('product-category').value,
+                        price: parseFloat(document.getElementById('product-price').value),
+                        stock: parseInt(document.getElementById('product-stock').value),
+                        description: document.getElementById('product-description').value,
+                        specifications: document.getElementById('product-specs').value,
+                        images: uploadedFiles,
+                        seller: sellerInfo,
+                        date: new Date().toISOString()
+                    };
+
+                    console.log('Datos del producto:', productData);
+                    
+                    // Mostrar mensaje de éxito
+                    alert('¡Producto publicado exitosamente!');
+                    
+                    // Limpiar el formulario
+                    productForm.reset();
+                    uploadedFiles = [];
+                    updateImagePreview();
+                    document.querySelector('#image-upload p').textContent = 
+                        'Arrastra y suelta las imágenes aquí o haz clic para seleccionar';
+                });
+            }
+
+            // Arrastrar y soltar imágenes
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                imageUpload.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                imageUpload.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                imageUpload.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                imageUpload.classList.add('highlight');
+            }
+
+            function unhighlight() {
+                imageUpload.classList.remove('highlight');
+            }
+
+            imageUpload.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                fileInput.files = files;
+                
+                // Disparar el evento change manualmente
+                const event = new Event('change');
+                fileInput.dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>

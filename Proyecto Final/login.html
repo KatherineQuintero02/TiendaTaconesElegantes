@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Passi Di Glamour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Login Form -->
+            <div class="auth-form active" id="login-form">
+                <div class="auth-header">
+                    <h1>Bienvenido de nuevo</h1>
+                    <p>Inicia sesión para continuar</p>
+                </div>
+                
+                <div class="role-switcher">
+                    <button type="button" class="role-btn active" data-role="cliente">Cliente</button>
+                    <button type="button" class="role-btn" data-role="vendedor">Vendedor</button>
+                    <button type="button" class="role-btn" data-role="admin">Administrador</button>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="name" placeholder="Tu nombre" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="tucorreo@ejemplo.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-header">
+                            <label for="password">Contraseña</label>
+                            <a href="#" id="forgot-password">¿Olvidaste tu contraseña?</a>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Recordarme</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                    
+                    <div class="divider">
+                        <span>o</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-google">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                        Continuar con Google
+                    </button>
+                    
+                    <p class="auth-switch">
+                        ¿No tienes una cuenta? <a href="registro.html" id="show-register">Regístrate</a>
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Register Form -->
+            <div class="auth-form" id="register-form">
+                <div class="auth-header">
+                    <h1>Crear Cuenta</h1>
+                    <p>Únete a nuestra comunidad</p>
+                </div>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="fullname">Nombre Completo</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="fullname" placeholder="Tu nombre completo" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Correo Electrónico</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" placeholder="tucorreo@ejemplo.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Contraseña</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <span class="strength-segment"></span>
+                                <span class="strength-segment"></span>
+                                <span class="strength-segment"></span>
+                                <span class="strength-segment"></span>
+                            </div>
+                            <span class="strength-text"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Contraseña</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirm-password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" aria-label="Mostrar contraseña">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span id="password-match" class="validation-message"></span>
+                    </div>
+                    
+                    <div class="form-group terms">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">Acepto los <a href="#">Términos de Servicio</a> y la <a href="#">Política de Privacidad</a></label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Crear Cuenta</button>
+                    
+                    <p class="auth-switch">
+                        ¿Ya tienes una cuenta? <a href="#" id="show-login">Inicia Sesión</a>
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Forgot Password Form -->
+            <div class="auth-form" id="forgot-password-form">
+                <div class="auth-header">
+                    <h1>Recuperar Contraseña</h1>
+                    <p>Ingresa tu correo para restablecer tu contraseña</p>
+                </div>
+                
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="forgot-email">Correo Electrónico</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="forgot-email" placeholder="tucorreo@ejemplo.com" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Enlace</button>
+                    
+                    <p class="auth-switch">
+                        <a href="#" id="back-to-login">Volver al inicio de sesión</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        
+        <div class="auth-image">
+            <div class="overlay"></div>
+            <div class="auth-content">
+                <h2>Passi Di Glamour</h2>
+                <p>Descubre la elegancia en cada paso</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Role switcher functionality
+            const roleButtons = document.querySelectorAll('.role-btn');
+            let selectedRole = 'cliente'; // Default role
+            
+            // Handle role selection
+            roleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    roleButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Update selected role
+                    selectedRole = this.getAttribute('data-role');
+                });
+            });
+            
+            // Login form submission
+            const loginForm = document.getElementById('loginForm');
+            
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // In a real app, you would validate credentials here
+                    // For now, we'll just store the name and redirect
+                    
+                    // Store user data in localStorage
+                    localStorage.setItem('user', JSON.stringify({
+                        name: name,
+                        email: email,
+                        role: selectedRole,
+                        isLoggedIn: true
+                    }));
+                    
+                    // Redirect based on role
+                    let redirectUrl = 'index.html';
+                    if (selectedRole === 'admin') {
+                        redirectUrl = 'admin.html';
+                    } else if (selectedRole === 'vendedor') {
+                        redirectUrl = 'vendedor.html';
+                    }
+                    
+                    window.location.href = redirectUrl;
+                });
+                
+                // Toggle password visibility
+                const togglePassword = document.querySelector('.toggle-password');
+                const passwordInput = document.getElementById('password');
+                
+                if (togglePassword && passwordInput) {
+                    togglePassword.addEventListener('click', function() {
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+                        this.querySelector('i').classList.toggle('fa-eye');
+                        this.querySelector('i').classList.toggle('fa-eye-slash');
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passi Di Glamour - Tienda en Línea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="categories-menu">
+                <button class="categories-toggle" aria-expanded="false" aria-controls="categories-dropdown">
+                    <i class="fas fa-bars"></i>
+                    <span>Categorías</span>
+                </button>
+                <div class="categories-dropdown" id="categories-dropdown">
+                    <a href="#" class="category-item" data-category="all">Todas las categorías</a>
+                    <a href="#" class="category-item" data-category="low">Tacón Bajo</a>
+                    <a href="#" class="category-item" data-category="medium">Tacón Medio</a>
+                    <a href="#" class="category-item" data-category="high">Tacón Alto</a>
+                    <a href="#" class="category-item" data-category="extra-high">Tacón Extra Alto</a>
+                    <a href="#" class="category-item" data-category="ultra-high">Ultra High Heels</a>
+                </div>
+            </div>
+            
+            <h1 class="logo">Passi Di Glamour</h1>
+            
+            <section class="search-section">
+                <input type="search" id="search-input" placeholder="Buscar productos..." aria-label="Buscar productos" autocomplete="off">
+                <button id="search-btn" aria-label="Buscar">
+                    <i class="fas fa-search"></i>
+                </button>
+            </section>
+
+            <section class="user-actions">
+                <button id="theme-toggle" aria-label="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <select id="language-selector" aria-label="Seleccionar idioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+                <div id="user-greeting" style="display: none; margin-right: 10px;">
+                    <span>¡Hola, </span>
+                    <span id="user-name" style="font-weight: bold;"></span>!
+                </div>
+                <a href="login.html" class="btn" id="login-btn">Iniciar Sesión</a>
+                <button id="logout-btn" class="btn" style="display: none;" aria-label="Cerrar sesión">
+                    Cerrar Sesión
+                </button>
+                <button id="cart-btn" class="btn btn-primary" aria-label="Carrito de compras">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </button>
+            </section>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <h2 data-i18n="welcome">Bienvenido a Passi Di Glamour</h2>
+            <p data-i18n="slogan"></p>
+        </section>
+
+        <section class="products-section">
+            <h2 data-i18n="products">Productos Destacados</h2>
+            <ul class="products-grid" id="products-container" role="list">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </ul>
+        </section>
+    </main>
+    <!--Archivo de inicio de sesion-->
+    <dialog id="login" class="login-menu">
+        <article class="login-menu">
+            <button onclick="location.href='login.html'" class="btn btn-secondary">
+            </button>
+            
+        </article>
+    </dialog>
+
+
+    <!-- Modal de Inicio de Sesión -->
+    <!--<dialog id="login-modal" class="modal">
+        <article class="modal-content">
+            <button class="close-modal" aria-label="Cerrar modal">&times;</button>
+            <h2 data-i18n="login">Iniciar Sesión</h2>
+            <form id="login-form">
+                <fieldset>
+                    <label for="email" data-i18n="email">Correo electrónico</label>
+                    <input type="email" id="email" required autocomplete="email">
+                    
+                    <label for="password" data-i18n="password">Contraseña</label>
+                    <input type="password" id="password" required autocomplete="current-password">
+                    
+                    <button type="submit" class="btn btn-primary" data-i18n="login">Iniciar Sesión</button>
+                </fieldset>
+            </form>
+            <p data-i18n="noAccount">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+        </article>
+    </dialog>-->
+
+    <!-- Modal de Registro -->
+    <!--<dialog id="register-modal" class="modal">
+        <article class="modal-content">
+            <button class="close-modal" aria-label="Cerrar modal">&times;</button>
+            <h2 data-i18n="register">Registrarse</h2>
+            <form id="register-form">
+                <fieldset>
+                    <label for="name" data-i18n="name">Nombre completo</label>
+                    <input type="text" id="name" required autocomplete="name">
+                    
+                    <label for="new-email" data-i18n="email">Correo electrónico</label>
+                    <input type="email" id="new-email" required autocomplete="email">
+                    
+                    <label for="new-password" data-i18n="password">Contraseña</label>
+                    <input type="password" id="new-password" required autocomplete="new-password">
+                    
+                    <button type="submit" class="btn btn-primary" data-i18n="register">Registrarse</button>
+                </fieldset>
+            </form>
+        </article>
+    </dialog>-->
+
+    <!-- Carrito de Compras -->
+    <aside id="cart-sidebar" class="cart-sidebar" aria-label="Carrito de compras">
+        <header class="cart-header">
+            <h3 data-i18n="shoppingCart">Carrito de Compras</h3>
+            <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
+        </header>
+        <ul class="cart-items" id="cart-items" role="list">
+            <!-- Los productos del carrito se cargarán aquí -->
+        </ul>
+        <footer class="cart-footer">
+            <p class="cart-total">
+                <span data-i18n="total">Total:</span>
+                <span id="cart-total">$0.00</span>
+            </p>
+            <button class="btn btn-primary" id="checkout-btn" data-i18n="checkout">Pagar</button>
+        </footer>
+    </aside>
+
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> E-Shop. <span data-i18n="allRightsReserved">Todos los derechos reservados.</span></p>
+    </footer>
+
+    <!-- Login Menu Iframe (hidden) -->
+    <iframe id="loginMenuFrame" src="login-menu/index.html" style="display: none;"></iframe>
+    
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('user');
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const userGreeting = document.getElementById('user-greeting');
+            const userName = document.getElementById('user-name');
+
+            if (userData) {
+                const user = JSON.parse(userData);
+                if (user.isLoggedIn) {
+                    // Show user greeting and hide login button
+                    if (loginBtn) loginBtn.style.display = 'none';
+                    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+                    if (userGreeting) userGreeting.style.display = 'inline-block';
+                    if (userName) userName.textContent = user.name;
+                }
+            }
+
+            // Handle logout
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    localStorage.removeItem('user');
+                    window.location.href = 'index.html';
+                });
+            }
+        });
+    </script>
+    <script src="./categories.js" type="module"></script>
+    <script src="./codigo.js" type="module"></script>
+</body>
+</html>
